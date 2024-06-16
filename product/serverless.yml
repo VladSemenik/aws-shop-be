@@ -1,0 +1,25 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: randomname
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: products
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-west-1
+
+functions:
+  getProductsList:
+    handler: get-all-products.getProductsList
+    events:
+      - http:
+          path: /products
+          method: get
+          cors: true
+  getProductsById:
+    handler: get-product.getProductsById
+    events:
+      - http:
+          path: /products/{productId}
+          method: get
+          cors: true
